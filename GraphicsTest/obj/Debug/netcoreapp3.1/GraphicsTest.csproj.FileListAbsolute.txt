@@ -27,3 +27,4 @@ C:\Users\cthep\source\repos\C# Maths Unit Test - Student Copy\C# Unit Test - Stu
 C:\Users\cthep\source\repos\C# Maths Unit Test - Student Copy\C# Unit Test - Student Copy\GraphicsTest\bin\Debug\netcoreapp3.1\topdowntanks\PNG\Tanks\barrelRed.png
 C:\Users\cthep\source\repos\C# Maths Unit Test - Student Copy\C# Unit Test - Student Copy\GraphicsTest\bin\Debug\netcoreapp3.1\topdowntanks\PNG\Tanks\tankRed.png
 C:\Users\cthep\source\repos\C# Maths Unit Test - Student Copy\C# Unit Test - Student Copy\GraphicsTest\bin\Debug\netcoreapp3.1\topdowntanks\PNG\Tanks\tracksSmall.png
+C:\Users\cthep\source\repos\C# Maths Unit Test - Student Copy\C# Unit Test - Student Copy\GraphicsTest\bin\Debug\netcoreapp3.1\topdowntanks\PNG\Obstacles\barrelRed_side.png

@@ -34,10 +34,18 @@ namespace GraphicsTest
             //player barrel info
             int barrWidth = playerBarrel.width;
             int barrHeight = playerBarrel.height;
-            Rectangle barrSourceRec = new Rectangle(0, 8, barrWidth, barrHeight);
+            Rectangle barrSourceRec = new Rectangle(0, 0, barrWidth, barrHeight);
             Rectangle barrDestinationRec = new Rectangle(screenWidth/2, screenHeight/2, barrWidth * 2, barrHeight * 2);
             System.Numerics.Vector2 barrOrigin = new System.Numerics.Vector2((barrWidth/2)+10, 0);
 
+            //player target info
+            int bullWidth = bullet.width;
+            int bullHeight = bullet.height;
+            Rectangle bullSource = new Rectangle(0, 0, bullWidth, bullHeight);
+            Rectangle bullDest = new Rectangle(screenWidth / 2, (screenHeight / 2), bullWidth , bodyHeight);
+            System.Numerics.Vector2 bullOrigin = new System.Numerics.Vector2(bullWidth, bullHeight);
+
+            //target info
             Rectangle barrelHitBox = new Rectangle(20, 20, 44, 62);
             SetTargetFPS(60);
 
@@ -46,6 +54,7 @@ namespace GraphicsTest
             Player player = new Player();
             float playrerRot = 0;
             float barrRot = 0;
+            float bullRot = 180;
             //--------------------------------------------------------------------------------------
 
             // Main game loop
@@ -60,17 +69,26 @@ namespace GraphicsTest
                     //playerBox.Rotate(-5);
                     playrerRot -= 5;
                     barrRot -= 5;
+                    bullRot -= 5;
                 }
                 if (IsKeyDown(KeyboardKey.KEY_D))
                 {
                     //playerBox.Rotate(5);
                     playrerRot += 5;
                     barrRot += 5;
+                    bullRot += 5;
                 }
                 if (IsKeyDown(KeyboardKey.KEY_LEFT))
+                {
+                    bullRot -= 5;
                     barrRot -= 5;
+                }
+
                 if (IsKeyDown(KeyboardKey.KEY_RIGHT))
+                {
+                    bullRot += 5;
                     barrRot += 5;
+                }
                 
                 //shooting and colision
 
@@ -84,6 +102,9 @@ namespace GraphicsTest
                 ClearBackground(BROWN);
                 DrawTexturePro(playerBody, tankSourceRec, tankDestinationRec, bodyOrigin, playrerRot, WHITE);
                 DrawTexturePro(playerBarrel, barrSourceRec, barrDestinationRec, barrOrigin, barrRot, WHITE);
+                DrawTexturePro(bullet, bullSource, bullDest, bullOrigin, bullRot, WHITE);
+                DrawTexture(redBarrel, 100, 100, WHITE);
+                DrawTexture(bullet, 200, 200, WHITE);
                 EndDrawing();
                 //----------------------------------------------------------------------------------
             }
