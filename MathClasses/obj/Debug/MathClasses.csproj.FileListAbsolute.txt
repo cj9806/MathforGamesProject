@@ -1,0 +1,7 @@
+C:\Users\cthep\source\repos\C# Maths Unit Test - Student Copy\C# Unit Test - Student Copy\MathClasses\bin\Debug\MathClasses.pdb
+C:\Users\cthep\source\repos\C# Maths Unit Test - Student Copy\C# Unit Test - Student Copy\MathClasses\obj\Debug\MathClasses.csprojAssemblyReference.cache
+C:\Users\cthep\source\repos\C# Maths Unit Test - Student Copy\C# Unit Test - Student Copy\MathClasses\obj\Debug\MathClasses.csproj.CoreCompileInputs.cache
+C:\Users\cthep\source\repos\C# Maths Unit Test - Student Copy\C# Unit Test - Student Copy\MathClasses\obj\Debug\MathClasses.pdb
+C:\Users\cthep\source\repos\C# Maths Unit Test - Student Copy\C# Unit Test - Student Copy\MathClasses\bin\Debug\MathClasses.dll.config
+C:\Users\cthep\source\repos\C# Maths Unit Test - Student Copy\C# Unit Test - Student Copy\MathClasses\bin\Debug\MathClasses.dll
+C:\Users\cthep\source\repos\C# Maths Unit Test - Student Copy\C# Unit Test - Student Copy\MathClasses\obj\Debug\MathClasses.dll
