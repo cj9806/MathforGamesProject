@@ -35,15 +35,19 @@ namespace GraphicsTest
             int barrWidth = playerBarrel.width;
             int barrHeight = playerBarrel.height;
             Rectangle barrSourceRec = new Rectangle(0, 0, barrWidth, barrHeight);
-            Rectangle barrDestinationRec = new Rectangle(screenWidth/2, screenHeight/2, barrWidth * 2, barrHeight * 2);
+            Rectangle barrDestinationRec = new Rectangle(screenWidth/2, screenHeight/2, barrWidth * 2, barrHeight*2);
             System.Numerics.Vector2 barrOrigin = new System.Numerics.Vector2((barrWidth/2)+10, 0);
 
-            //player target info
+            //player bullet info
+            int bullStartX= (screenWidth / 2) - 8;
+            int bullStartY= (screenHeight / 2);
             int bullWidth = bullet.width;
             int bullHeight = bullet.height;
             Rectangle bullSource = new Rectangle(0, 0, bullWidth, bullHeight);
-            Rectangle bullDest = new Rectangle(screenWidth / 2, (screenHeight / 2), bullWidth , bodyHeight);
-            System.Numerics.Vector2 bullOrigin = new System.Numerics.Vector2(bullWidth, bullHeight);
+            Rectangle bullDest = new Rectangle(bullStartX, bullStartY, bullWidth , bullHeight);
+            System.Numerics.Vector2 bullOrigin = new System.Numerics.Vector2(bullWidth-6, bullHeight);
+            bool fired = false;
+            Rectangle bulluetHitBox = bullDest;
 
             //target info
             Rectangle barrelHitBox = new Rectangle(20, 20, 44, 62);
@@ -55,6 +59,14 @@ namespace GraphicsTest
             float playrerRot = 0;
             float barrRot = 0;
             float bullRot = 180;
+
+            MathClasses.Vector3 forwardVect = new MathClasses.Vector3(0, 0, 0);
+            //figure out how to get the direction to fire the bullet
+            //on a graph you can solve a linear equation with just 2 points so  all ineedis to figure a |starting position| and a |position on the direction of travel|
+            // starting position is the 4th value in the destination rectangle for the barrel
+            //movement postition is the second value on the destination rectangle
+
+
             //--------------------------------------------------------------------------------------
 
             // Main game loop
@@ -66,32 +78,55 @@ namespace GraphicsTest
                 //player move step                
                 if (IsKeyDown(KeyboardKey.KEY_A))
                 {
-                    //playerBox.Rotate(-5);
+                    
                     playrerRot -= 5;
                     barrRot -= 5;
-                    bullRot -= 5;
+                    if(!fired)
+                        bullRot -= 5;
                 }
                 if (IsKeyDown(KeyboardKey.KEY_D))
                 {
-                    //playerBox.Rotate(5);
+                    
                     playrerRot += 5;
-                    barrRot += 5;
-                    bullRot += 5;
+                    barrRot += 5; 
+                    if (!fired)
+                        bullRot += 5;
                 }
                 if (IsKeyDown(KeyboardKey.KEY_LEFT))
                 {
-                    bullRot -= 5;
-                    barrRot -= 5;
+                    if (!fired)
+                        bullRot -= 3;
+                    barrRot -= 3;
                 }
 
                 if (IsKeyDown(KeyboardKey.KEY_RIGHT))
                 {
-                    bullRot += 5;
-                    barrRot += 5;
+                    if (!fired)
+                        bullRot += 3;
+                    barrRot += 3;
+                }
+
+                if (IsKeyPressed(KeyboardKey.KEY_SPACE))
+                {
+                    fired = true;
+                    Matrix3 buletrotation = new Matrix3();
+                    buletrotation.RotateZ((Math.PI/180) * barrRot);
+                    MathClasses.Vector3 forward = new MathClasses.Vector3(1, 0,0);
+                    forwardVect = buletrotation * forward;
+                    
+                 }
+                if (fired)
+                {
+                    bullDest.x += (forwardVect.y*2);
+                    bullDest.y += (forwardVect.x*2);
                 }
                 
                 //shooting and colision
+                //press space
+                // move bullet
 
+
+                //
 
                 //----------------------------------------------------------------------------------
 
@@ -101,10 +136,10 @@ namespace GraphicsTest
 
                 ClearBackground(BROWN);
                 DrawTexturePro(playerBody, tankSourceRec, tankDestinationRec, bodyOrigin, playrerRot, WHITE);
-                DrawTexturePro(playerBarrel, barrSourceRec, barrDestinationRec, barrOrigin, barrRot, WHITE);
-                DrawTexturePro(bullet, bullSource, bullDest, bullOrigin, bullRot, WHITE);
+                DrawTexturePro(playerBarrel, barrSourceRec, barrDestinationRec, barrOrigin, barrRot, WHITE);               
                 DrawTexture(redBarrel, 100, 100, WHITE);
-                DrawTexture(bullet, 200, 200, WHITE);
+                if (fired)
+                    DrawTexturePro(bullet, bullSource, bullDest, bullOrigin, bullRot, WHITE);
                 EndDrawing();
                 //----------------------------------------------------------------------------------
             }
