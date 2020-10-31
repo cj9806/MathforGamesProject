@@ -23,6 +23,7 @@ namespace GraphicsTest
             Texture2D playerBarrel = LoadTexture(@"topdowntanks\PNG\Tanks\barrelGreen.png");
             Texture2D redBarrel = LoadTexture(@"topdowntanks\PNG\Obstacles\barrelRed_side.png");
             Texture2D bullet = LoadTexture(@"topdowntanks\PNG\Bullets\bulletYellowSilver.png");
+            Texture2D xPlode = LoadTexture(@"topdowntanks\PNG\Smoke\smokeOrange0.png");
 
             //player body info
             int bodyWidth = playerBody.width;
@@ -50,7 +51,7 @@ namespace GraphicsTest
             Rectangle bulluetHitBox = bullDest;
 
             //target info
-            Rectangle barrelHitBox = new Rectangle(20, 20, 44, 62);
+            Rectangle barrelHitBox = new Rectangle(100, 100, 44, 62);
             SetTargetFPS(60);
 
             
@@ -59,6 +60,7 @@ namespace GraphicsTest
             float playrerRot = 0;
             float barrRot = 0;
             float bullRot = 180;
+            bool boom = false;
 
             MathClasses.Vector3 forwardVect = new MathClasses.Vector3(0, 0, 0);
             //figure out how to get the direction to fire the bullet
@@ -117,9 +119,28 @@ namespace GraphicsTest
                  }
                 if (fired)
                 {
-                    bullDest.x += (forwardVect.y*2);
-                    bullDest.y += (forwardVect.x*2);
+                    bullDest.x += (forwardVect.y*3);
+                    bullDest.y += (forwardVect.x*3);
+                    if (bullDest.x < 30 || bullDest.x > 1630)
+                    {
+                        fired = false;
+                        bullDest.x = (screenWidth / 2) - 8;
+                        bullDest.y = screenHeight / 2;
+                    }
+                    if (bullDest.y < 30 || bullDest.y > 930)
+                    {
+                        fired = false;
+                        bullDest.x = (screenWidth / 2) - 8;
+                        bullDest.y = screenHeight / 2;
+                    }
+                    if (CheckCollisionRecs(bullDest, barrelHitBox))
+                    {
+                        boom = true;
+                        fired = false;
+                    }
                 }
+
+                
                 
                 //shooting and colision
                 //press space
@@ -136,8 +157,11 @@ namespace GraphicsTest
 
                 ClearBackground(BROWN);
                 DrawTexturePro(playerBody, tankSourceRec, tankDestinationRec, bodyOrigin, playrerRot, WHITE);
-                DrawTexturePro(playerBarrel, barrSourceRec, barrDestinationRec, barrOrigin, barrRot, WHITE);               
-                DrawTexture(redBarrel, 100, 100, WHITE);
+                DrawTexturePro(playerBarrel, barrSourceRec, barrDestinationRec, barrOrigin, barrRot, WHITE);
+                if (!boom)
+                    DrawTexture(redBarrel, 100, 100, WHITE);
+                else
+                    DrawTexture(xPlode, 100, 100, ORANGE);
                 if (fired)
                     DrawTexturePro(bullet, bullSource, bullDest, bullOrigin, bullRot, WHITE);
                 EndDrawing();

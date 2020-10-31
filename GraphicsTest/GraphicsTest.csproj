@@ -20,6 +20,9 @@
     <None Update="topdowntanks\PNG\Obstacles\barrelRed_side.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="topdowntanks\PNG\Smoke\smokeOrange0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="topdowntanks\PNG\Tanks\barrelGreen.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
